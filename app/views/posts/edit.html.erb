@@ -1,0 +1,16 @@
+<h1>Posts#edit</h1>
+<%= form_for @post do |f| %>
+
+    <div class="field">
+        <%= f.label :title, class: "label-text" %>
+        <%= f.text_field :title, placeholder: "タイトル", class: "form-field" %>
+      </div>
+
+    <div class="field">
+        <%= f.label :写真 %>
+        <%= f.file_field :image %>
+    </div>
+
+    <%= f.submit "編集する" %>
+<% end %>
+

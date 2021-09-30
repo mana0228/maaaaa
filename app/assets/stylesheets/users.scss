@@ -1,0 +1,15 @@
+// Place all the styles related to the users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.field-container-wrapper{
+    position: relative;
+    .field-container{
+        position: absolute;
+        top: 50px;
+        left: 53%;
+        transform: translateX(-50%);
+        width: 20%;
+    
+    }
+}
+

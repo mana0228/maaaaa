@@ -1,0 +1,51 @@
+<div class="post-wrapper">
+  <div class="post">
+      タイトル : <%= @post.title %><br>
+      <%= image_tag @post.image_url, size: "250×200" if @post.image? %><br>
+      <% if user_signed_in? && current_user.id == @post.user_id %>  
+          <%= link_to "編集する", edit_post_path(@post.user.id) %><br>
+          <%= button_to "削除する", post_path(@post.user.id), method: :delete %><br>
+      <% end %>
+      投稿したユーザーのメールアドレス : <%= @post.user.email %>
+  </div>
+
+  <% if user_signed_in? %>
+    <% if current_user.already_liked?(@post) %>
+        <%= link_to post_like_path(@post), method: :delete do %>
+            <p>いいねを取り消す</p><%= @post.likes.count %><br>
+        <% end %>
+    <% else %>
+        <%= link_to post_likes_path(@post), method: :post do %>
+          <i class="fas fa-heart"></i><%= @post.likes.count %>
+        <% end %>
+    <% end %>
+  <% else %>
+    <i class="fas fa-heart"></i><%= @post.likes.count %><br>
+  <% end %>
+
+  <div class="comment-wrapper">
+    <p>コメント一覧</p>
+    <% @comments.each do |c| %>
+      <div>
+        <%= c.user.email unless c.user.blank? %>
+        <br>
+        <%= c.content %>
+      </div>
+        <br>
+      <%= button_to "削除する", post_comment_path(c.post.id, c.id), method: :delete %>
+    <% end %>
+
+    <% if user_signed_in? %>
+      <%= form_with(model: [@post, @comment], local: true) do |f| %>
+        <%= f.text_area :content %>
+        <%= button_tag type: "submit" do %>
+          <i class="far fa-comments"></i> コメントする<br>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= link_to "マイページへ", user_path(@post.user.id) %><br>
+
+  <%= link_to "Post一覧に戻る", posts_path %>
+</div>

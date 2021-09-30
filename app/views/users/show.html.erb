@@ -1,0 +1,22 @@
+<h5>マイページ</h5>
+<%= render :partial => "relationships/follow_button", :locals => { user: @user } %>
+<%= image_tag set_image(@user), size: "250×250",class: "img_fluid rounded-circle" %>
+
+<h2><%= @user.email %></h2>
+
+<% if @user.id == current_user.id %>
+
+<% else %>
+  <% if @isRoom == true %>
+    <p><a href="/rooms/<%= @roomId %>">チャットへ</a>
+  <% else %>
+    <%= form_for @room do |f| %>
+      <%= fields_for @entry do |e| %>
+        <%= e.hidden_field :user_id, :value=> @user.id %>
+      <% end %>
+      <%= f.submit "チャットを始める" %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<%= link_to "→ユーザー一覧に戻る", users_path %>

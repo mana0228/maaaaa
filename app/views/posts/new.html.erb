@@ -1,0 +1,20 @@
+<div class="field-container-wrapper">
+    <div class="field-container"><br>
+        <h5>新規投稿<h5><br>
+        <%= form_for @post do |f| %>
+            <div class="field">
+                <%= f.label :タイトル, class: "label-text" %>
+                <%= f.text_field :title, class: "form-field" %>
+            </div><br>
+            
+            <div class="field">
+                <%= f.label :写真 %>
+                <%= f.file_field :image %>
+            </div><br>
+
+            <%= f.submit "投稿する", class: "btn btn-info" %>
+        <% end %><br>
+
+        <%= link_to "投稿一覧に戻る", posts_path %>
+    </div>
+</div>
