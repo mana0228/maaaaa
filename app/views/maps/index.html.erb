@@ -1,4 +1,4 @@
-<h2>Google map</h2>
+<h3>Google map</h3>
 
 <input id="address" type="textbox" value="">
 <input type="button" value="地図を検索" onclick="codeAddress()">
@@ -87,8 +87,8 @@
     src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap"  
     async defer>
 </script>
-
-<h3>場所投稿フォーム</h3>
+<br>
+<h4>場所投稿フォーム</h4>
 <%= form_for(@map, :url => { controller:'maps', action:'create'})do |f| %>
 
     <p>
@@ -96,10 +96,10 @@
     <%= f.text_field :address, size: "50x1" %>
     </p>
 
-    <%= f.submit "送信"%>
+    <%= f.submit "送信", class: "btn btn-info"%>
 <% end %>
-
-<h3>場所一覧</h3>
+<br>
+<h4>場所一覧</h4>
 <% @maps.each do |t| %>
     <p>住所 : <%= t.address %></p>
     <p>緯度 : <%= t.latitude %></p>

@@ -1,8 +1,8 @@
-<h5>マイページ</h5>
+<h4>＜プロフィール＞</h4>
 <%= render :partial => "relationships/follow_button", :locals => { user: @user } %>
 <%= image_tag set_image(@user), size: "250×250",class: "img_fluid rounded-circle" %>
 
-<h2><%= @user.email %></h2>
+<h5>メールアドレス : <%= @user.email %></h5>
 
 <% if @user.id == current_user.id %>
 
@@ -14,9 +14,9 @@
       <%= fields_for @entry do |e| %>
         <%= e.hidden_field :user_id, :value=> @user.id %>
       <% end %>
-      <%= f.submit "チャットを始める" %>
+      <%= f.submit "DMを始める", class: "btn btn-info" %>
     <% end %>
   <% end %>
 <% end %>
 
-<%= link_to "→ユーザー一覧に戻る", users_path %>
+<%= link_to "ユーザー一覧に戻る", users_path %>

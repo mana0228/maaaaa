@@ -1,35 +1,37 @@
 <div class="post-wrapper">
-  <div class="post">
+  <div class="post-left">
       タイトル : <%= @post.title %><br>
       <%= image_tag @post.image_url, size: "250×200" if @post.image? %><br>
       <% if user_signed_in? && current_user.id == @post.user_id %>  
           <%= link_to "編集する", edit_post_path(@post.user.id) %><br>
           <%= button_to "削除する", post_path(@post.user.id), method: :delete %><br>
       <% end %>
-      投稿したユーザーのメールアドレス : <%= @post.user.email %>
   </div>
-
-  <% if user_signed_in? %>
-    <% if current_user.already_liked?(@post) %>
-        <%= link_to post_like_path(@post), method: :delete do %>
-            <p>いいねを取り消す</p><%= @post.likes.count %><br>
-        <% end %>
+  <div class="post-right">
+      投稿したユーザーのメールアドレス : <%= @post.user.email %>
+  
+    <% if user_signed_in? %>
+      <% if current_user.already_liked?(@post) %>
+          <%= link_to post_like_path(@post), method: :delete do %>
+              <p>いいねを取り消す</p><%= @post.likes.count %><br>
+          <% end %>
+      <% else %>
+          <%= link_to post_likes_path(@post), method: :post do %>
+            <i class="fas fa-heart"></i><%= @post.likes.count %>
+          <% end %>
+      <% end %>
     <% else %>
-        <%= link_to post_likes_path(@post), method: :post do %>
-          <i class="fas fa-heart"></i><%= @post.likes.count %>
-        <% end %>
+      <i class="fas fa-heart"></i><%= @post.likes.count %><br>
     <% end %>
-  <% else %>
-    <i class="fas fa-heart"></i><%= @post.likes.count %><br>
-  <% end %>
-
+  </div>
+  
   <div class="comment-wrapper">
     <p>コメント一覧</p>
     <% @comments.each do |c| %>
       <div>
-        <%= c.user.email unless c.user.blank? %>
+        メールアドレス : <%= c.user.email unless c.user.blank? %>
         <br>
-        <%= c.content %>
+        コメント内容 : <%= c.content %>
       </div>
         <br>
       <%= button_to "削除する", post_comment_path(c.post.id, c.id), method: :delete %>

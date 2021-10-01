@@ -1,7 +1,7 @@
-<h1>Users#index</h1>
-   
+<h3>ユーザー一覧ページ</h3>
+<br>
 <% if user_signed_in? %>
-    <h2>Hello <%= current_user.email %></h2>
+    <h5>こんにちは <%= current_user.email %></h5>
     <% @users.each do |u| %>
         <%= render :partial => "relationships/follow_button", :locals => { user: u } %>
     <p><a href="/users/<%= u.id %>"><%= u.email %>さん</a></p>

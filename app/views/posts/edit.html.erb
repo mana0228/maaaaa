@@ -1,16 +1,17 @@
-<h1>Posts#edit</h1>
+<div class="post-wrapper"><br>
+<h5>投稿編集ページ</h5><br>
 <%= form_for @post do |f| %>
 
     <div class="field">
-        <%= f.label :title, class: "label-text" %>
+        <%= f.label :タイトル, class: "label-text" %>
         <%= f.text_field :title, placeholder: "タイトル", class: "form-field" %>
-      </div>
+      </div><br>
 
     <div class="field">
         <%= f.label :写真 %>
         <%= f.file_field :image %>
-    </div>
+    </div><br>
 
-    <%= f.submit "編集する" %>
+    <%= f.submit "編集する" , class: "btn btn-info"%>
 <% end %>
-
+</div>
