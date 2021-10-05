@@ -7,9 +7,9 @@
           <%= button_to "削除する", post_path(@post.user.id), method: :delete %><br>
       <% end %>
   </div>
+
   <div class="post-right">
       投稿したユーザーのメールアドレス : <%= @post.user.email %>
-  
     <% if user_signed_in? %>
       <% if current_user.already_liked?(@post) %>
           <%= link_to post_like_path(@post), method: :delete do %>
@@ -34,7 +34,9 @@
         コメント内容 : <%= c.content %>
       </div>
         <br>
-      <%= button_to "削除する", post_comment_path(c.post.id, c.id), method: :delete %>
+      <% if user_signed_in? && current_user.id == c.user_id %>  
+        <%= button_to "削除する", post_comment_path(c.post.id, c.id), method: :delete %>
+      <% end %>
     <% end %>
 
     <% if user_signed_in? %>

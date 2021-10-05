@@ -4,8 +4,11 @@
 
 <h5>メールアドレス : <%= @user.email %></h5>
 
-<% if @user.id == current_user.id %>
+<% if current_user.id == @user.id %>
+  <%= link_to "編集する", edit_user_registration_path %>
+<% end %><br>
 
+<% if @user.id == current_user.id %>
 <% else %>
   <% if @isRoom == true %>
     <p><a href="/rooms/<%= @roomId %>">チャットへ</a>
@@ -20,3 +23,4 @@
 <% end %>
 
 <%= link_to "ユーザー一覧に戻る", users_path %>
+

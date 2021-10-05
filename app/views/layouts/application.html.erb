@@ -20,10 +20,7 @@
       <li><%= link_to "新規投稿", new_post_path %></li>
       <li><%= link_to "マイページ", user_path(current_user.id) %></li> 
       <li> <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-      <%= form_tag({controller:"posts",action:"index"}, method: :get) do %>
-        <%= text_field_tag :search %>
-        <%= submit_tag '検索'  %>
-      <% end %>
+      <li><%= link_to "投稿一覧", posts_path %><li>
     <% else %>
       <br>
       <li><%= link_to "新規登録", new_user_registration_path %></li>

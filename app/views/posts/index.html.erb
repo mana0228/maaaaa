@@ -1,13 +1,17 @@
 <div class="container">
-  <div class="row">
+<%= form_tag({controller:"posts",action:"index"}, method: :get) do %>
+    <%= text_field_tag :search %>
+    <%= submit_tag '検索'  %>
+<% end %>
+
+  <div class="row"><br>
     <% @posts.each do |t| %>
     <div class="col-sm-3 post">
         タイトル : <%= t.title %><br>
         <%= image_tag t.image_url, size: "250x200" if t.image? %> 
         <br>
         <%= link_to "詳細へ", post_path(t.id) %> 
-    </div>            
-
+    </div>        
         <% if user_signed_in? %>
             <% if current_user.already_liked?(t) %>
                 <%= link_to post_like_path(id: t.id, post_id: t.id), method: :delete do %>
